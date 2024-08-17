@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jwt-backend-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jwt-backend-app
+  template:
+    metadata:
+      labels:
+        app: jwt-backend-app
+    spec:
+      containers:
+      - name: jwt-backend-container
+        image: bardiark03/auth-jwt-backend:v1.0.0
+        ports:
+        - containerPort: 3000
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jwt-frontend-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jwt-frontend-app
+  template:
+    metadata:
+      labels:
+        app: jwt-frontend-app
+    spec:
+      containers:
+      - name: jwt-frontend-container
+        image: bardiark03/auth-jwt-frontend:v1.0.0
+        ports:
+        - containerPort: 4173
