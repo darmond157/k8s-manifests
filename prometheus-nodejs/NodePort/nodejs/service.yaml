@@ -7,5 +7,7 @@ spec:
     app: prometheus-nodejs-app
   ports:
     - protocol: TCP
+      nodePort: 30004
       port: 4000       # Port that the service will expose
       targetPort: 4000  # Port that the container is listening on
+  type: NodePort
