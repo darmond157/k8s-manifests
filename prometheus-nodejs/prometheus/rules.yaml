@@ -1,11 +1,9 @@
 rules:
   custom:
-    - seriesQuery: 'api_requests_count'
-      resources:
-        overrides:
-          namespace: {resource: "namespace"}
-          pod: {resource: "pod"}
-      name:
-        matches: "^(.*)_total"
-        as: "${1}_per_second"
-      metricsQuery: 'sum(rate(api_requests_count[1m])) by (pod)'
+  - seriesQuery: '{__name__=~"^api_requests_count$"}'
+    resources:
+      template: <<.Resource>>
+    name:
+      matches: ""
+      as: "api_requests_count"
+    metricsQuery: sum(<<.Series>>{<<.LabelMatchers>>}) by (<<.GroupBy>>)

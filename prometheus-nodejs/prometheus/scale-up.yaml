@@ -2,7 +2,7 @@ apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
   name: prometheus-nodejs-hpa
-  namespace: monitoring
+  namespace: default
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
@@ -11,10 +11,10 @@ spec:
   minReplicas: 1
   maxReplicas: 4
   metrics:
-    - type: External
-      external:
+    - type: Pods
+      pods:
         metric:
           name: api_requests_count
         target:
-          type: Value
-          value: "100"
+          type: AverageValue
+          averageValue: 10

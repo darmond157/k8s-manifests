@@ -3000,7 +3000,9 @@ prometheus:
         static_configs:
           - targets:
               - 192.168.49.2:30004
-
+            labels:
+              pod: 'prometheus-nodejs-deployment-74dbf5956-rthw2'
+              namespace: 'default'
     # - job_name: kube-etcd
     #   kubernetes_sd_configs:
     #     - role: node
